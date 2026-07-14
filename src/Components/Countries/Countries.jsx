@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { use } from 'react';
+import Country from '../Country/Country';
+import './Countries.css';
 
-const Countries = () => {
+const Countries = ({ countriesPromises }) => {
+
+  const countriesData = use(countriesPromises);
+  const countries = countriesData.countries
+  // console.log(countries);
+
   return (
     <div>
-      <h1>On the countries...</h1>
+      <h1>On the countries...{countries.length}</h1>
+      <div className='countries'>
+        {
+          countries.map(country => <Country
+            key={country.cca3.cca3}
+            country={country}></Country>)
+        }
+      </div>
     </div>
   );
 };
