@@ -19,8 +19,8 @@ const Country = ({ country, handleVisistedCoutnries, handleVisitedFlag }) => {
     marginTop: "10px"
   }
 
+  // handler 1
   const handleVisited = () => {
-
     // toogling basic process 1
     /* if (visited) {
       setVisited(false);
@@ -31,10 +31,18 @@ const Country = ({ country, handleVisistedCoutnries, handleVisitedFlag }) => {
 
     // toogling process 2
     // visited ? setVisited(false) : setVisited(true);
-    // setVisited(visited ? false : true); 
+    // setVisited(visited ? false : true);
     setVisited(!visited)
-    handleVisistedCoutnries(country); 
-  }
+    // setVisited((prevVisited) => !prevVisited);
+
+    handleVisistedCoutnries(country);
+  };
+
+  // handler 2
+  const handleFlagClick = () => {
+    setVisited(!visited)
+    handleVisitedFlag(imageSrc);
+  };
 
   return (
     <div className={`country ${visited && 'visited-country'}`}>
@@ -51,7 +59,11 @@ const Country = ({ country, handleVisistedCoutnries, handleVisitedFlag }) => {
         }
       </button>
 
-      <button onClick={()=>{handleVisitedFlag(imageSrc)}} className='btn'>Add Visited Flag</button>
+      <button className='btn' onClick={handleFlagClick}>
+        {
+          visited ? 'Remove Visited Flag' : 'Add Visited Flag'
+        }
+      </button>
     </div>
   );
 };
