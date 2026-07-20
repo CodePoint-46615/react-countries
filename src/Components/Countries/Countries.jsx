@@ -7,38 +7,48 @@ const Countries = ({ countriesPromises }) => {
   const [visitedCountries, setVisitedCountries] = useState([]);
   const [visitedFlag, setVisitedFlag] = useState([]);
 
-  // handler 1
+  // handler 1 - minimal version; 
+  /* const handleVisistedCoutnries = (country) => {
+    console.log("Visited Country Clicked", country); 
+    const newVisistedCountries = [...visitedCountries, country]; 
+    setVisitedCountries(newVisistedCountries); 
+  } */
+
+  /* Extended Version */
   const handleVisistedCoutnries = (country) => {
+    setVisitedCountries((visitedCountires) => {
 
-    setVisitedCountries((prevVisitedCountries) => {
-
-      const isAlreadyVisited = prevVisitedCountries.some(
-        (visitedCountry) => visitedCountry?.cca3 === country?.cca3
-      );
+      const isAlreadyVisited = visitedCountires.some((alreadyVisited) => alreadyVisited?.cca3?.cca3 === country?.cca3?.cca3);
 
       if (isAlreadyVisited) {
-        return prevVisitedCountries.filter(
-          (visitedCountry) => visitedCountry?.cca3 !== country?.cca3
-        );
+        return visitedCountires.filter((visitedCountires) => visitedCountires?.cca3?.cca3 !== country?.cca3?.cca3);
       }
 
-      return [...prevVisitedCountries, country];
+      // console.log(visitedCountires?.name?.common); 
+
+      return [...visitedCountires, country]
+
     });
 
   };
 
-  // handler 2
+  // handler 2 - minimal version
+  /* const handleVisitedFlag = (flag) => {
+    const newVisitedFlag = [...visitedFlag, flag];
+    setVisitedFlag(newVisitedFlag);
+  }; */
+
+  // Extended version
   const handleVisitedFlag = (flag) => {
-
-    setVisitedFlag((prevVisitedFlag) => {
-      if (prevVisitedFlag.includes(flag)) {
-        return prevVisitedFlag.filter((visitedFlagItem) => visitedFlagItem !== flag);
+    setVisitedFlag((visitedFlag) => {
+      if (visitedFlag.includes(flag)) {
+        return visitedFlag.filter((vf) => vf !== flag);
       }
 
-      return [...prevVisitedFlag, flag];
+      return [...visitedFlag, flag]
     });
+  }
 
-  };
 
   const countriesData = use(countriesPromises);
   const countries = countriesData.countries
@@ -52,7 +62,7 @@ const Countries = ({ countriesPromises }) => {
       <ol className='display-grid'>
         {
           visitedCountries.map((country) => (
-            <li key={country?.cca3 || country?.name?.common}>{country?.name?.common}</li>
+            <li key={country?.cca3?.cca3 || country?.name?.common}>{country?.name?.common}</li>
           ))
         }
       </ol>
